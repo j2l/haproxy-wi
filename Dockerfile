@@ -7,7 +7,7 @@ ENV	  DEBIAN_FRONTEND="noninteractive" \
 RUN       apt-get update -qq && apt-get upgrade -y --with-new-pkgs && \
 	  apt-get install -y --no-install-recommends apt-utils apt-transport-https ca-certificates
 	  
-RUN	  apt-get install -y --no-install-recommends gnupg curl wget bash nano net-tools dnsutils git \
+RUN	  apt-get install -y --no-install-recommends gnupg curl wget bash nano net-tools dnsutils git systemd \
 	  apache2 python3 python3-pip python3-ldap rsync ansible python3-requests python3-networkx python3-matplotlib python3-bottle \
 	  python3-future python3-jinja2 python3-peewee python3-distro python3-pymysql python3-psutil python3-paramiko netcat-traditional \
 	  nmap net-tools lshw dos2unix libapache2-mod-wsgi-py3 openssl sshpass
@@ -24,6 +24,6 @@ RUN       git clone https://github.com/hap-wi/roxy-wi.git /var/www/haproxy-wi &&
           a2ensite roxy-wi.conf && \
           a2enmod cgid ssl proxy_http rewrite && \
           pip3 install -r /var/www/haproxy-wi/config_other/requirements_deb.txt && \
-          service restart apache2
+          systemctl restart apache2
           
 CMD       /usr/sbin/apache2ctl -DFOREGROUND
