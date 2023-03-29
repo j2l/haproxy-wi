@@ -16,16 +16,14 @@ RUN       apt-get clean autoclean -y && \
     	  apt-get autoremove -y && \
     	  rm -rf /var/lib/apt/* /var/lib/cache/* /var/lib/log/* \
 	  /var/tmp/* /usr/share/doc/ /usr/share/man/ /usr/share/locale/ \
-	  /root/.cache /root/.local /root/.gnupg /root/.config /tmp/*
-
-WORKDIR   cd /var/www/         
+	  /root/.cache /root/.local /root/.gnupg /root/.config /tmp/*   
 
 RUN       git clone https://github.com/hap-wi/roxy-wi.git /var/www/haproxy-wi && \
-	  chown -R www-data:www-data haproxy-wi && \
-          cp haproxy-wi/config_other/httpd/roxy-wi_deb.conf /etc/apache2/sites-available/roxy-wi.conf && \
+	  chown -R www-data:www-data /var/www/haproxy-wi && \
+          cp /var/www/haproxy-wi/config_other/httpd/roxy-wi_deb.conf /etc/apache2/sites-available/roxy-wi.conf && \
           a2ensite roxy-wi.conf && \
           a2enmod cgid ssl proxy_http rewrite && \
-          pip3 install -r haproxy-wi/config_other/requirements_deb.txt && \
+          pip3 install -r /var/www/haproxy-wi/config_other/requirements_deb.txt && \
           systemctl restart apache2
           
 CMD       /usr/sbin/apache2ctl -DFOREGROUND
