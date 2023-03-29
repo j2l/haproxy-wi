@@ -23,6 +23,18 @@ RUN       git clone https://github.com/hap-wi/roxy-wi.git /var/www/haproxy-wi &&
           cp /var/www/haproxy-wi/config_other/httpd/roxy-wi_deb.conf /etc/apache2/sites-available/roxy-wi.conf && \
           a2ensite roxy-wi.conf && \
           a2enmod cgid ssl proxy_http rewrite && \
-          pip3 install -r /var/www/haproxy-wi/config_other/requirements_deb.txt
+          pip3 install -r /var/www/haproxy-wi/config_other/requirements_deb.txt && \
+	  pip3 install paramiko-ng && \
+	  chmod +x haproxy-wi/app/*.py && \
+	  cp haproxy-wi/config_other/logrotate/* /etc/logrotate.d/ && \
+	  mkdir /var/lib/roxy-wi/ /var/lib/roxy-wi/keys/ /var/lib/roxy-wi/configs/ /var/lib/roxy-wi/configs/hap_config/	\
+	  /var/lib/roxy-wi/configs/kp_config/ /var/lib/roxy-wi/configs/nginx_config/ \
+	  /var/lib/roxy-wi/configs/apache_config//var/log/roxy-wi/ /etc/roxy-wi/ \
+	  mv haproxy-wi/roxy-wi.cfg /etc/roxy-wi && \
+	  openssl req -newkey rsa:4096 -nodes -keyout /var/www/haproxy-wi/app/certs/haproxy-wi.key -x509 -days 10365 -out /var/www/haproxy-wi/app/certs/haproxy-wi.crt -subj "/C=US/ST=Almaty/L=Springfield/O=Roxy-WI/OU=IT/CN=*.roxy-wi.org/emailAddress=aidaho@roxy-wii.org" && \
+	  chown -R apache:apache /var/www/haproxy-wi/ && \
+	  chown -R apache:apache /var/lib/roxy-wi/ && \
+	  chown -R apache:apache /var/log/roxy-wi/ && \
+	  chown -R apache:apache /etc/roxy-wi/
           
 CMD       /usr/sbin/apache2ctl -DFOREGROUND
