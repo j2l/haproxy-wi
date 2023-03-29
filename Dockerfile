@@ -24,6 +24,6 @@ RUN       git clone https://github.com/hap-wi/roxy-wi.git /var/www/haproxy-wi &&
           a2ensite roxy-wi.conf && \
           a2enmod cgid ssl proxy_http rewrite && \
           pip3 install -r /var/www/haproxy-wi/config_other/requirements_deb.txt && \
-          systemctl restart apache2
+          service restart apache2
           
 CMD       /usr/sbin/apache2ctl -DFOREGROUND
