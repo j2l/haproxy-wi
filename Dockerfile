@@ -21,7 +21,7 @@ RUN       apt-get clean autoclean -y && \
 WORKDIR   cd /var/www/         
 
 RUN       git clone https://github.com/hap-wi/roxy-wi.git /var/www/haproxy-wi && \
-	  chown -R www-data:www-data haproxy-wi/ && \
+	  chown -R www-data:www-data haproxy-wi && \
           cp haproxy-wi/config_other/httpd/roxy-wi_deb.conf /etc/apache2/sites-available/roxy-wi.conf && \
           a2ensite roxy-wi.conf && \
           a2enmod cgid ssl proxy_http rewrite && \
