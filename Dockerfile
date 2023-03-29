@@ -32,9 +32,9 @@ RUN       git clone https://github.com/hap-wi/roxy-wi.git /var/www/haproxy-wi &&
 	  /var/lib/roxy-wi/configs/apache_config/ /var/log/roxy-wi/ /etc/roxy-wi/ && \
 	  mv /var/www/haproxy-wi/roxy-wi.cfg /etc/roxy-wi && \
 	  openssl req -newkey rsa:4096 -nodes -keyout /var/www/haproxy-wi/app/certs/haproxy-wi.key -x509 -days 10365 -out /var/www/haproxy-wi/app/certs/haproxy-wi.crt -subj "/C=US/ST=Almaty/L=Springfield/O=Roxy-WI/OU=IT/CN=*.roxy-wi.org/emailAddress=aidaho@roxy-wii.org" && \
-	  chown -R apache:apache /var/www/haproxy-wi/ && \
-	  chown -R apache:apache /var/lib/roxy-wi/ && \
-	  chown -R apache:apache /var/log/roxy-wi/ && \
-	  chown -R apache:apache /etc/roxy-wi/
+	  chown -R www-data:www-data /var/www/haproxy-wi/ && \
+	  chown -R www-data:www-data /var/lib/roxy-wi/ && \
+	  chown -R www-data:www-data /var/log/roxy-wi/ && \
+	  chown -R www-data:www-data /etc/roxy-wi/
           
 CMD       /usr/sbin/apache2ctl -DFOREGROUND
