@@ -25,8 +25,8 @@ RUN       git clone https://github.com/hap-wi/roxy-wi.git /var/www/haproxy-wi &&
           a2enmod cgid ssl proxy_http rewrite && \
           pip3 install -r /var/www/haproxy-wi/config_other/requirements_deb.txt && \
 	  pip3 install paramiko-ng && \
-	  chmod +x haproxy-wi/app/*.py && \
-	  cp haproxy-wi/config_other/logrotate/* /etc/logrotate.d/ && \
+	  chmod +x /var/www/haproxy-wi/app/*.py && \
+	  cp /var/www/haproxy-wi/config_other/logrotate/* /etc/logrotate.d/ && \
 	  mkdir /var/lib/roxy-wi/ /var/lib/roxy-wi/keys/ /var/lib/roxy-wi/configs/ /var/lib/roxy-wi/configs/hap_config/	\
 	  /var/lib/roxy-wi/configs/kp_config/ /var/lib/roxy-wi/configs/nginx_config/ \
 	  /var/lib/roxy-wi/configs/apache_config//var/log/roxy-wi/ /etc/roxy-wi/ && \
