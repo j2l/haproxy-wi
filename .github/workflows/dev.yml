@@ -23,6 +23,6 @@ jobs:
         name: Push_Docker Dev
         uses: docker/build-push-action@v3
         with:
-          file: main.Dockerfile
+          file: dev.Dockerfile
           push: true
           tags: yanik39/haproxy-wi:dev
