@@ -3,7 +3,9 @@ FROM      ubuntu:22.04
 ENV	  DEBIAN_FRONTEND="noninteractive" \
           TERM="xterm-256color" \
 	  LC_ALL=C.UTF-8
-    
+
+COPY 	  root/ /    
+
 RUN       apt-get update -qq && apt-get upgrade -y --with-new-pkgs && \
 	  apt-get install -y --no-install-recommends apt-utils apt-transport-https ca-certificates
 	  
@@ -31,10 +33,10 @@ RUN       git clone https://github.com/hap-wi/roxy-wi.git /var/www/haproxy-wi &&
 	  /var/lib/roxy-wi/configs/kp_config/ /var/lib/roxy-wi/configs/nginx_config/ \
 	  /var/lib/roxy-wi/configs/apache_config/ /var/log/roxy-wi/ /etc/roxy-wi/ && \
 	  mv /var/www/haproxy-wi/roxy-wi.cfg /etc/roxy-wi && \
-	  openssl req -newkey rsa:4096 -nodes -keyout /var/www/haproxy-wi/app/certs/haproxy-wi.key -x509 -days 10365 -out /var/www/haproxy-wi/app/certs/haproxy-wi.crt -subj "/C=US/ST=Almaty/L=Springfield/O=Roxy-WI/OU=IT/CN=*.roxy-wi.org/emailAddress=aidaho@roxy-wii.org" && \
 	  chown -R www-data:www-data /var/www/haproxy-wi/ && \
 	  chown -R www-data:www-data /var/lib/roxy-wi/ && \
 	  chown -R www-data:www-data /var/log/roxy-wi/ && \
-	  chown -R www-data:www-data /etc/roxy-wi/
+	  chown -R www-data:www-data /etc/roxy-wi/ && \
+	  chmod +x /haproxy-wi
           
-CMD       /usr/sbin/apache2ctl -DFOREGROUND
+ENTRYPOINT ["/haproxy-wi"]
