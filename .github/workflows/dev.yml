@@ -1,4 +1,4 @@
-name: Main Workflow
+name: Dev Workflow
 
 on:
   workflow_dispatch
@@ -20,12 +20,12 @@ jobs:
           username: ${{ secrets.DOCKER_USER }}
           password: ${{ secrets.DOCKER_TOKEN }}
       -
-        name: Push_Docker Latest
+        name: Push_Docker Dev
         uses: docker/build-push-action@v3
         with:
           file: main.Dockerfile
           push: true
-          tags: yanik39/haproxy-wi:latest
+          tags: yanik39/haproxy-wi:dev
       -
         name: Git Checkout
         uses: actions/checkout@v3
