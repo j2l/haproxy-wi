@@ -23,6 +23,7 @@ jobs:
         name: Push_Docker Latest
         uses: docker/build-push-action@v3
         with:
+          file: core.Dockerfile
           push: true
           tags: yanik39/haproxy-wi:latest
       -
