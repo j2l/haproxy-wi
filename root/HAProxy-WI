@@ -15,5 +15,6 @@ if [[ ! -f "/help/supervisor_secure" ]]
 then
 	/bin/bash /help/supervisor_secrets.sh
 fi
+rm /etc/fail2ban/jail.d/sshd.conf
 echo $(which haproxy)
 exec /usr/bin/python3 /usr/local/bin/supervisord -c /etc/supervisor/supervisord.conf
