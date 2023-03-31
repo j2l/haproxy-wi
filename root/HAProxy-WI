@@ -13,6 +13,8 @@ if [[ ! -f "/help/supervisor_secure" ]]
 then
 	/bin/bash /help/supervisor_secrets.sh
 fi
-echo $(which python)
+echo $(which python3)
+echo $(which python2)
 echo $(which supervisord)
-exec python3 supervisord -c /etc/supervisor/supervisord.conf
+
+exec python /usr/local/bin/supervisord -c /etc/supervisor/supervisord.conf
