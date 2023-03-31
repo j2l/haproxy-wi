@@ -14,4 +14,4 @@ then
 	/bin/bash /help/supervisor_secrets.sh
 fi
 
-exec /usr/local/bin/python3 /usr/local/bin/supervisord -c /etc/supervisor/supervisord.conf
+exec python3 supervisord -c /etc/supervisor/supervisord.conf
