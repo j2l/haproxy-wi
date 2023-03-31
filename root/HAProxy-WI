@@ -1,20 +1,19 @@
 #!/bin/bash
 
-    
 if [[ ! -f "/var/www/haproxy-wi/app/certs/haproxy-wi.key" ]]
 then
 	openssl req -newkey rsa:4096 -nodes \
     		-keyout /var/www/haproxy-wi/app/certs/haproxy-wi.key -x509 -days 10365 \
     		-out /var/www/haproxy-wi/app/certs/haproxy-wi.crt \
 	  	-subj "/C=US/ST=Almaty/L=Springfield/O=Roxy-WI/OU=IT/CN=*.example.com/emailAddress=haproxy-wi@example.com"
-		
-	chown -R www-data:www-data /var/www/haproxy-wi
 fi
 
 if [[ ! -f "/help/supervisor_secure" ]]
 then
 	/bin/bash /help/supervisor_secrets.sh
 fi
-rm /etc/fail2ban/jail.d/sshd.conf
-echo $(which haproxy)
+
+chown -R www-data:www-data /var/www/haproxy-wi
+chown www-data:www-data /var/run/apache2
+
 exec /usr/bin/python3 /usr/local/bin/supervisord -c /etc/supervisor/supervisord.conf
