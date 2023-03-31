@@ -8,7 +8,7 @@ then
     		-out /var/www/haproxy-wi/app/certs/haproxy-wi.crt \
 	  	-subj "/C=US/ST=Almaty/L=Springfield/O=Roxy-WI/OU=IT/CN=*.example.com/emailAddress=haproxy-wi@example.com"
 		
-	chmod -R www-data:www-data /var/www/haproxy-wi
+	chown -R www-data:www-data /var/www/haproxy-wi
 fi
 
 if [[ ! -f "/help/supervisor_secure" ]]
