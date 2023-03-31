@@ -6,7 +6,9 @@ then
 	openssl req -newkey rsa:4096 -nodes \
     		-keyout /var/www/haproxy-wi/app/certs/haproxy-wi.key -x509 -days 10365 \
     		-out /var/www/haproxy-wi/app/certs/haproxy-wi.crt \
-	  	-subj "/C=US/ST=Almaty/L=Springfield/O=Roxy-WI/OU=IT/CN=*.example.com/emailAddress=haproxy-wi@example.com" 
+	  	-subj "/C=US/ST=Almaty/L=Springfield/O=Roxy-WI/OU=IT/CN=*.example.com/emailAddress=haproxy-wi@example.com"
+		
+	chmod -R www-data:www-data /var/www/haproxy-wi
 fi
 
 if [[ ! -f "/help/supervisor_secure" ]]
